@@ -1,6 +1,6 @@
 """Common settings and globals."""
 
-
+import dj_database_url
 from os.path import abspath, basename, dirname, join, normpath
 from sys import path
 
@@ -43,16 +43,10 @@ MANAGERS = ADMINS
 
 ########## DATABASE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
-    }
-}
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(
+    default='postgres://localhost/are_there_spiders'
+)
 ########## END DATABASE CONFIGURATION
 
 
@@ -116,7 +110,9 @@ SECRET_KEY = r"g7!m5v$tyk%*3-l5nw8lwju)lsg#!znrk1nb3&vhx_f$%()9zm"
 ########## SITE CONFIGURATION
 # Hosts/domain names that are valid for this site
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '.aretherespiders.com',
+]
 ########## END SITE CONFIGURATION
 
 
