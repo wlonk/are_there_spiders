@@ -4,6 +4,21 @@ import dj_database_url
 from os.path import abspath, basename, dirname, join, normpath
 from sys import path
 
+from os import environ
+
+# Normally you should not import ANYTHING from Django directly
+# into your settings, but ImproperlyConfigured is an exception.
+from django.core.exceptions import ImproperlyConfigured
+
+
+def get_env_setting(setting):
+    """ Get the environment setting or return exception """
+    try:
+        return environ[setting]
+    except KeyError:
+        error_msg = "Set the %s env variable" % setting
+        raise ImproperlyConfigured(error_msg)
+
 
 ########## PATH CONFIGURATION
 # Absolute filesystem path to the Django project directory:
@@ -85,7 +100,7 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = normpath(join(SITE_ROOT, 'assets'))
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = (
@@ -97,7 +112,46 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
+STATICFILES_STORAGE = 'are_there_spiders.custom_storages.S3PipelineStorage'
+
+AWS_ACCESS_KEY_ID = get_env_setting('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = get_env_setting('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = get_env_setting('AWS_STORAGE_BUCKET_NAME')
+S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+STATIC_URL = S3_URL
+ADMIN_MEDIA_PREFIX = S3_URL + 'admin/'
+
 ########## END STATIC FILE CONFIGURATION
+
+
+########## PIPELINE CONFIGURATION
+PIPELINE_CSS = {
+    'all': {
+        'source_filenames': (
+          'css/*.css',
+        ),
+        'output_filename': 'css/all.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
+}
+
+PIPELINE_JS = {
+    'all': {
+        'source_filenames': (
+          'js/*.js',
+        ),
+        'output_filename': 'js/all.js',
+    }
+}
+
+# @todo: until I get some compressor set up.
+PIPELINE_CSS_COMPRESSOR = None
+PIPELINE_JS_COMPRESSOR = None
+
+########## END PIPELINE CONFIGURATION
 
 
 ########## SECRET CONFIGURATION
@@ -159,6 +213,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'pipeline.middleware.MinifyHTMLMiddleware',
 )
 ########## END MIDDLEWARE CONFIGURATION
 
@@ -190,6 +245,8 @@ DJANGO_APPS = (
 THIRD_PARTY_APPS = (
     # Database migration helpers:
     'south',
+    # Static files but better:
+    'pipeline',
 )
 
 # Apps specific for this project go here.
