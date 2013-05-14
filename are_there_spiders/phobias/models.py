@@ -11,6 +11,7 @@ class Artwork(models.Model):
         ('book', 'Book'),
         ('movie', 'Movie'),
         ('videogame', 'Video Game'),
+        ('other', 'Other'),
     )
 
     name = models.CharField(max_length=100)
