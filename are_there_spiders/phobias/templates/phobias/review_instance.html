@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load markup %}
+
+{% block title %}{{ review }}{% endblock %}
+
+{% block page_title %}{{ review }}{% endblock page_title %}
+
+{% block content %}
+<table class="table">
+  <tbody>
+    <tr>
+      <td>Media:</td>
+      <td>{{ review.artwork }}</td>
+    </tr>
+    <tr>
+      <td>Spider quantity:</td>
+      <td>{{ review.spider_quantity }}</td>
+    </tr>
+    <tr>
+      <td>Spider quality:</td>
+      <td>{{ review.spider_quality.all|join:", " }}</td>
+    </tr>
+  </tbody>
+</table>
+<div id="summary">{{ review.summary|markdown }}</div>
+{% endblock content %}

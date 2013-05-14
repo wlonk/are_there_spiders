@@ -8,6 +8,8 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$', TemplateView.as_view(template_name='base.html')),
 
+    url(r'^reviews/', include('phobias.urls', namespace='phobias')),
+
     # Examples:
     # url(r'^$', 'are_there_spiders.views.home', name='home'),
     # url(r'^are_there_spiders/', include('are_there_spiders.foo.urls')),

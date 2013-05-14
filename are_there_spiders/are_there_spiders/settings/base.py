@@ -236,6 +236,7 @@ DJANGO_APPS = (
 
     # Useful template tags:
     # 'django.contrib.humanize',
+    'django.contrib.markup',
 
     # Admin panel and documentation:
     'django.contrib.admin',
@@ -247,10 +248,13 @@ THIRD_PARTY_APPS = (
     'south',
     # Static files but better:
     'pipeline',
+    # Tags on models:
+    'taggit',
 )
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
+    'phobias',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

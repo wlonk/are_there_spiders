@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Reviews{% endblock %}
+
+{% block page_title %}Reviews{% endblock page_title %}
+
+{% block content %}
+<ul>
+{% for obj in object_list %}
+  <li><a href="{{ obj.get_absolute_url }}">{{ obj }}</a></li>
+{% empty %}
+  <li>Sorry, no reviews</li>
+{% endfor %}
+</ul>
+{% endblock content %}
