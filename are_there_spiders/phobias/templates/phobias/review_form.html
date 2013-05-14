@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% load markup %}
+
+{% block title %}Create/edit review{% endblock %}
+
+{% block page_title %}Create/edit review{% endblock page_title %}
+
+{% block content %}
+<form class="form-horizontal" action="{% url 'phobias:new' %}" method="post">
+  {% csrf_token %}
+  {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+      <div class="alert alert-error">{{ error }}</div>
+    {% endfor %}
+  {% endif %}
+  {% for field in form %}
+  <div class="control-group{% if field.errors %} error{% endif %}">
+    <label class="control-label{% if field.field.required %} required{% endif %}" for="{{ field.html_name }}">{{ field.label }}</label>
+    <div class="controls">
+      {{ field }}
+      {% if field.errors %}
+        {% for error in field.errors %}
+          <span class="help-inline">{{ error }}</span>
+        {% endfor %}
+      {% endif %}
+      {% if field.help_text %}
+        <span class="help-inline">{{ field.help_text }}</span>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn">submit</button>
+    </div>
+  </div>
+</form>
+{% endblock content %}
