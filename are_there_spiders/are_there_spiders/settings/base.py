@@ -83,6 +83,8 @@ USE_L10N = True
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
 USE_TZ = True
+
+LOGIN_REDIRECT_URL = '/'
 ########## END GENERAL CONFIGURATION
 
 

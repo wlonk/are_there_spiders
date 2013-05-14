@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Log in{% endblock %}
+
+{% block page_title %}Log in{% endblock page_title %}
+
+{% block content %}
+<form class="form-horizontal" action="{% url 'auth:login' %}" method="post">
+  {% include "_horizontal_form.html" %}
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn">log in</button>
+    </div>
+  </div>
+  <input type="hidden" name="next" value="{{ next }}" />
+</form>
+{% endblock content %}
