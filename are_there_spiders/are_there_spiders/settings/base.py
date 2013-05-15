@@ -1,6 +1,6 @@
 """Common settings and globals."""
 
-VERSION = '0.1.1'
+VERSION = '0.1.2'
 
 import dj_database_url
 from os.path import abspath, basename, dirname, join, normpath
@@ -133,7 +133,9 @@ ADMIN_MEDIA_PREFIX = S3_URL + 'admin/'
 PIPELINE_CSS = {
     'all': {
         'source_filenames': (
-          'css/*.css',
+            'css/bootstrap.css',
+            'css/bootstrap-responsive.css',
+            'css/project.css'
         ),
         'output_filename': 'css/all.css',
         'extra_context': {
@@ -145,7 +147,9 @@ PIPELINE_CSS = {
 PIPELINE_JS = {
     'all': {
         'source_filenames': (
-          'js/*.js',
+            'js/jquery-1.9.1.js',
+            'js/bootstrap.js',
+            'js/project.js'
         ),
         'output_filename': 'js/all.js',
     }
