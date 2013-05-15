@@ -158,7 +158,6 @@ PIPELINE_JS = {
 # @todo: until I get some compressor set up.
 PIPELINE_CSS_COMPRESSOR = None
 PIPELINE_JS_COMPRESSOR = None
-
 ########## END PIPELINE CONFIGURATION
 
 
@@ -259,6 +258,8 @@ THIRD_PARTY_APPS = (
     'pipeline',
     # Tags on models:
     'taggit',
+    # Signup:
+    'registration',
 )
 
 # Apps specific for this project go here.
@@ -269,6 +270,11 @@ LOCAL_APPS = (
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 ########## END APP CONFIGURATION
+
+
+########## REGISTRATION CONFIGURATION
+ACCOUNT_ACTIVATION_DAYS = 7
+########## END REGISTRATION CONFIGURATION
 
 
 ########## LOGGING CONFIGURATION

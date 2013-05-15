@@ -5,7 +5,7 @@
 {% block page_title %}Log in{% endblock page_title %}
 
 {% block content %}
-<form class="form-horizontal" action="{% url 'auth:login' %}" method="post">
+<form class="form-horizontal" action="{% url 'auth:auth_login' %}" method="post">
   {% include "_horizontal_form.html" %}
   <div class="control-group">
     <div class="controls">
