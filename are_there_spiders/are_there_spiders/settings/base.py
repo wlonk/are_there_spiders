@@ -168,6 +168,7 @@ SECRET_KEY = r"g7!m5v$tyk%*3-l5nw8lwju)lsg#!znrk1nb3&vhx_f$%()9zm"
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = [
     '.aretherespiders.com',
+    'aretherespiders.herokuapp.com',
 ]
 ########## END SITE CONFIGURATION
 
