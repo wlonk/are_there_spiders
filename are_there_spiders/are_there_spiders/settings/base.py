@@ -1,6 +1,6 @@
 """Common settings and globals."""
 
-VERSION = '0.2.3'
+VERSION = '0.3.0'
 
 import dj_database_url
 from os.path import abspath, basename, dirname, join, normpath
@@ -154,10 +154,6 @@ PIPELINE_JS = {
         'output_filename': 'js/all.js',
     }
 }
-
-# @todo: until I get some compressor set up.
-PIPELINE_CSS_COMPRESSOR = None
-PIPELINE_JS_COMPRESSOR = None
 ########## END PIPELINE CONFIGURATION
 
 
