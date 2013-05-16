@@ -1,3 +1,5 @@
 # This file is here because many Platforms as a Service look for
 #	requirements.txt in the root directory of a project.
 -r requirements/production.txt
+# this magic comment installs mercurial :: hg+
+# The Heroku buildpack needs it in this file to let you install from hg repos.
