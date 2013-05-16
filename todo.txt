@@ -1,5 +1,3 @@
-Registration
-
 View reviews as collected entities under the Media entry
 Pagination
 Filter by media type (tabs on reviews page?)
