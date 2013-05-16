@@ -154,10 +154,6 @@ PIPELINE_JS = {
         'output_filename': 'js/all.js',
     }
 }
-
-# @todo: until I get some compressor set up.
-PIPELINE_CSS_COMPRESSOR = None
-PIPELINE_JS_COMPRESSOR = None
 ########## END PIPELINE CONFIGURATION
 
 
