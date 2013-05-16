@@ -1,4 +1,3 @@
-Sort out caching
 Make small changes per Joe's email below
 
 Write fabfiles for:

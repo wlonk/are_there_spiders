@@ -10,6 +10,9 @@ def github(branch='master'):
         return
     local('git push origin %s' % branch)
 
+def tags():
+    local('git push --tags')
+
 def heroku():
     local('git push heroku master')
 
@@ -28,6 +31,7 @@ def static_assets():
 def all():
     github('master')
     github('develop')
+    tags()
     heroku()
     syncdb()
     migrate()
