@@ -3,3 +3,5 @@
 -r requirements/production.txt
 # this magic comment installs mercurial :: hg+
 # The Heroku buildpack needs it in this file to let you install from hg repos.
+# And another magic line: Heroku needs to see this to get some C dependencies.
+pylibmc==1.2.3
