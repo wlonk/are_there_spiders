@@ -16,7 +16,7 @@ class CollectionView(ListView):
     template_name = 'phobias/review_list.html'
 
 
-class CreateView(FormView, LoginRequiredMixin):
+class CreateView(LoginRequiredMixin, FormView):
     form_class = ReviewForm
     template_name = 'phobias/review_form.html'
 

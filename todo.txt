@@ -1,8 +1,8 @@
+View reviews as collected entities under the Media entry
 Pagination
 Filter by media type (tabs on reviews page?)
 Search by title + media type
-Registration
 Review flagging
 Javascript-y auto-fill, so if you start reviewing limbo, it'll auto-fill the rest of the fields on Limbo for you
-View reviews as collected entities under the Media entry
 Images on media?
+Update Readme.rst
