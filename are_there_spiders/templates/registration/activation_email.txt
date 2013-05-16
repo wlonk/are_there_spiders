@@ -1,1 +1,10 @@
-{{ activation_key }} {{ expiration_days }} {{ site }}
+Welcome to Are there spiders? We hope you find it useful.
+
+There's just one more thing to do before you can start posting reviews:
+confirm your email. Click on the link below, or paste it into your browser's
+address bar.
+
+http://{{ site.domain }}{% url 'registration_activate' activation_key=activation_key %}
+
+If there's a problem (or you don't get a chance to do this within {{ expiration_days }} days),
+contact us at help@aretherespiders.com
