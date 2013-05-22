@@ -1,13 +1,4 @@
 Make small changes per Joe's email below
-
-Write fabfiles for:
- - git push origin develop
- - git push origin master
- - git push heroku master
- - heroku run python are_there_spiders/manage.py syncdb
- - heroku run python are_there_spiders/manage.py migrate
- - django-admin.py collectstatic --settings=are_there_spiders.settings.production --noinput
-
 View reviews as collected entities under the Media entry
 Pagination
 Filter by media type (tabs on reviews page?)
