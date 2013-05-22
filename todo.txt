@@ -1,3 +1,4 @@
+Slug for pk on artworks
 Pagination
 Filter by media type (tabs on reviews page?)
 Search by title + media type
