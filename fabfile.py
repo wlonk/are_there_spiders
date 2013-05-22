@@ -53,7 +53,7 @@ def static_assets():
     """
     Pipeline static assets to Amazon S3.
     """
-    local('django-admin.py collectstatic --settings=are_there_spiders.settings.production --noinput')
+    _run_manage_command_on_heroku('collectstatic --settings=are_there_spiders.settings.production --noinput')
 
 @task(default=True)
 def all():
@@ -64,6 +64,6 @@ def all():
     github('develop')
     tags()
     heroku()
-    syncdb()
+    # syncdb()
     migrate()
     static_assets()
