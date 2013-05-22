@@ -4,6 +4,7 @@ Search by title + media type
 Review flagging
 Javascript-y auto-fill, so if you start reviewing limbo, it'll auto-fill the rest of the fields on Limbo for you
 Add timestamps on reviews
+Fix tabindex issues
 Add New Relic tracking
 Add better logging
 Images on media?
