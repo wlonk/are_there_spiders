@@ -1,6 +1,6 @@
 """Common settings and globals."""
 
-VERSION = '0.4.1'
+VERSION = '0.4.2'
 
 import dj_database_url
 from os.path import abspath, basename, dirname, join, normpath
@@ -143,6 +143,7 @@ PIPELINE_CSS = {
         },
     },
 }
+PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CSSMinCompressor'
 
 PIPELINE_JS = {
     'all': {
@@ -154,6 +155,7 @@ PIPELINE_JS = {
         'output_filename': 'js/all.js',
     }
 }
+PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
 ########## END PIPELINE CONFIGURATION
 
 
