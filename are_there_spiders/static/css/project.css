@@ -32,3 +32,8 @@ body > .container {
 .help-inline {
     font-style: italic;
 }
+
+th {
+    text-align: right;
+    width: 150px;
+}
