@@ -1,46 +1,11 @@
-Sort out caching
-Make small changes per Joe's email below
-
-Write fabfiles for:
- - git push origin develop
- - git push origin master
- - git push heroku master
- - heroku run python are_there_spiders/manage.py syncdb
- - heroku run python are_there_spiders/manage.py migrate
- - django-admin.py collectstatic --settings=are_there_spiders.settings.production --noinput
-
-View reviews as collected entities under the Media entry
 Pagination
 Filter by media type (tabs on reviews page?)
 Search by title + media type
 Review flagging
 Javascript-y auto-fill, so if you start reviewing limbo, it'll auto-fill the rest of the fields on Limbo for you
+Add timestamps on reviews
 Add New Relic tracking
 Add better logging
 Images on media?
 Write docs?
 Write tests?
-
-
-Notes from Joe:
-
-ATS is looking great. I'll send you some intro text soon, if you'd like.
-
-I'm thinking that the "Reviews" tab should maybe instead be called "List of
-Media" - since we're not really reviewing stuff, we're just informing people
-of what contains spiders.
-
-I noticed in the first version that each entry was titled "Review of [X]".
-It'd be better if it was just titled "[X]". Repeating "Review of" in every
-entry becomes redundant quickly.
-
-If a user were to submit a review of Limbo, and I were to have a different
-review... is there a way to sync those reviews up? An ideal might look like:
-the Limbo review page having an "add to this review" button, and if I try to
-post a new Limbo review the system saying "Would you like to add this review
-to the existing Limbo (2011) page?" I don't know how easy that would be. The
-alternative is just to allow for multiple Limbo (2011) reviews that don't
-interact. That's fine too.
-
-Those are just some thoughts I have at the moment. More to come! I'm excited
-about this site-to-be.

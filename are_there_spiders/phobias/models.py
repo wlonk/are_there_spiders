@@ -26,6 +26,9 @@ class Artwork(models.Model):
             self.get_kind_display(),
         )
 
+    def get_absolute_url(self):
+        return reverse('phobias:artwork_instance', kwargs={'pk': self.pk})
+
 
 class TaggedReview(TaggedItemBase):
     content_object = models.ForeignKey('Review')
@@ -54,10 +57,10 @@ class Review(models.Model):
     summary = models.TextField(max_length=1000, blank=True)
 
     def __unicode__(self):
-        return "Review of %s by %s" % (
+        return "%s by %s" % (
             self.artwork,
             self.user.username
         )
 
     def get_absolute_url(self):
-        return reverse('phobias:instance', kwargs={'pk': self.pk})
+        return reverse('phobias:edit', kwargs={'pk': self.pk})

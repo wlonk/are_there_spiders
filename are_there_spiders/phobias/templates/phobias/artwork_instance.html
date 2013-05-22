@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% load markup %}
+
+{% block title %}{{ artwork.name }}{% endblock %}
+
+{% block page_title %}{{ artwork.name }}{% endblock page_title %}
+
+{% block content %}
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <th>Creator:</th>
+      <td>{{ artwork.creator }}</td>
+    </tr>
+    <tr>
+      <th>Year:</th>
+      <td>{{ artwork.year }}</td>
+    </tr>
+    <tr>
+      <th>Kind:</th>
+      <td>{{ artwork.kind }}</td>
+    </tr>
+  </tbody>
+</table>
+
+{% for review in artwork.review_set.all %}
+<div class="review well">
+  <h2 class="review-author">{{ review.user.username }}'s review</h2>
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <th>Spider quantity:</th>
+        <td>{{ review.get_spider_quantity_display }}</td>
+      </tr>
+      <tr>
+        <th>Spider quality:</th>
+        <td>
+          {% for tag in review.spider_quality.all %}
+          <a href="#" class="label label-info">{{ tag }}</a>
+          {% empty %}
+          no tags
+          {% endfor %}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="summary">{{ review.summary|markdown }}</div>
+  {% if review.user == user %}
+  <div id="edit-delete">
+    <a href="{% url 'phobias:edit' pk=review.pk %}" class="btn">edit</a>
+    <a href="{% url 'phobias:delete' pk=review.pk %}" class="btn btn-danger">delete</a>
+  </div>
+  {% endif %}
+</div>
+{% empty %}
+<div class="no-reviews well">
+  <p>No reviews</p>
+</div>
+{% endfor %}
+{% if user.is_authenticated and not review_on_page %}
+<div class="new">
+  <a href="{% url 'phobias:new' %}?artwork={{ artwork.pk }}" class="btn">add</a>
+</div>
+{% endif %}
+{% endblock content %}
