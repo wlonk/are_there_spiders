@@ -119,6 +119,7 @@ STATICFILES_FINDERS = (
 
 STATICFILES_STORAGE = 'are_there_spiders.custom_storages.S3PipelineStorage'
 
+AWS_QUERYSTRING_AUTH = False
 AWS_ACCESS_KEY_ID = get_env_setting('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = get_env_setting('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = get_env_setting('AWS_STORAGE_BUCKET_NAME')
