@@ -1,6 +1,6 @@
 """Common settings and globals."""
 
-VERSION = '0.4.3'
+VERSION = '0.4.4'
 
 import dj_database_url
 from os.path import abspath, basename, dirname, join, normpath
@@ -106,12 +106,14 @@ STATIC_ROOT = normpath(join(SITE_ROOT, 'assets'))
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 # STATIC_URL = '/static/'
 
-# See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
+# See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/
+#   #std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = (
     normpath(join(SITE_ROOT, 'static')),
 )
 
-# See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
+# See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/
+#   #staticfiles-finders
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -144,7 +146,6 @@ PIPELINE_CSS = {
         },
     },
 }
-PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CSSMinCompressor'
 
 PIPELINE_JS = {
     'all': {
@@ -156,7 +157,6 @@ PIPELINE_JS = {
         'output_filename': 'js/all.js',
     }
 }
-PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
 ########## END PIPELINE CONFIGURATION
 
 
@@ -178,7 +178,8 @@ ALLOWED_HOSTS = [
 
 
 ########## FIXTURE CONFIGURATION
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-FIXTURE_DIRS
+# See: https://docs.djangoproject.com/en/dev/ref/settings/
+#   #std:setting-FIXTURE_DIRS
 FIXTURE_DIRS = (
     normpath(join(SITE_ROOT, 'fixtures')),
 )
@@ -186,7 +187,8 @@ FIXTURE_DIRS = (
 
 
 ########## TEMPLATE CONFIGURATION
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
+# See: https://docs.djangoproject.com/en/dev/ref/settings/
+#   #template-context-processors
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.debug',

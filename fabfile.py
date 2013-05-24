@@ -17,12 +17,14 @@ def github(branch='master'):
         return
     local('git push origin %s' % branch)
 
+
 @task
 def tags():
     """
     Push tags to GitHub.
     """
     local('git push --tags')
+
 
 @task
 def heroku():
@@ -31,8 +33,10 @@ def heroku():
     """
     local('git push heroku master')
 
+
 def _run_manage_command_on_heroku(command):
     local('heroku run python are_there_spiders/manage.py %s' % command)
+
 
 @task
 def syncdb():
@@ -41,6 +45,7 @@ def syncdb():
     """
     _run_manage_command_on_heroku('syncdb')
 
+
 @task
 def migrate():
     """
@@ -48,12 +53,18 @@ def migrate():
     """
     _run_manage_command_on_heroku('migrate')
 
+
 @task
 def static_assets():
     """
     Pipeline static assets to Amazon S3.
     """
-    _run_manage_command_on_heroku('collectstatic --settings=are_there_spiders.settings.production --noinput')
+    local(
+        'django-admin.py collectstatic'
+        ' --settings=are_there_spiders.settings.production'
+        ' --noinput'
+    )
+
 
 @task(default=True)
 def all():
