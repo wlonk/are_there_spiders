@@ -60,7 +60,7 @@
 {% endfor %}
 {% if user.is_authenticated and not review_on_page %}
 <div class="new">
-  <a href="{% url 'phobias:new' %}?artwork={{ artwork.pk }}" class="btn">add</a>
+  <a href="{% url 'phobias:new' %}?artwork={{ artwork.slug }}" class="btn">add</a>
 </div>
 {% endif %}
 {% endblock content %}

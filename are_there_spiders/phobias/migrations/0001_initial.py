@@ -12,6 +12,7 @@ class Migration(SchemaMigration):
         db.create_table(u'phobias_artwork', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('slug', self.gf('autoslug.fields.AutoSlugField')(unique=True, max_length=50, populate_from='name', unique_with=())),
             ('kind', self.gf('django.db.models.fields.CharField')(max_length=10)),
             ('creator', self.gf('django.db.models.fields.CharField')(max_length=100)),
             ('year', self.gf('django.db.models.fields.IntegerField')(default=2010)),
@@ -32,7 +33,7 @@ class Migration(SchemaMigration):
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
             ('artwork', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['phobias.Artwork'])),
             ('spider_quantity', self.gf('django.db.models.fields.CharField')(max_length=10)),
-            ('summary', self.gf('django.db.models.fields.TextField')(max_length=1000)),
+            ('summary', self.gf('django.db.models.fields.TextField')(max_length=1000, blank=True)),
         ))
         db.send_create_signal(u'phobias', ['Review'])
 
@@ -91,6 +92,7 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'kind': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': "'name'", 'unique_with': '()'}),
             'year': ('django.db.models.fields.IntegerField', [], {'default': '2010'})
         },
         u'phobias.review': {
@@ -98,7 +100,7 @@ class Migration(SchemaMigration):
             'artwork': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['phobias.Artwork']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'spider_quantity': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
-            'summary': ('django.db.models.fields.TextField', [], {'max_length': '1000'}),
+            'summary': ('django.db.models.fields.TextField', [], {'max_length': '1000', 'blank': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
         },
         u'phobias.taggedreview': {

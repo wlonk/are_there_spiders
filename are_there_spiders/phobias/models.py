@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 
+from autoslug import AutoSlugField
 from taggit.managers import TaggableManager
 from taggit.models import TaggedItemBase
 
@@ -15,6 +16,7 @@ class Artwork(models.Model):
     )
 
     name = models.CharField(max_length=100)
+    slug = AutoSlugField(populate_from='name', unique=True, db_index=True)
     kind = models.CharField(max_length=10, choices=ARTWORK_CHOICES)
     creator = models.CharField(max_length=100)
     year = models.IntegerField(default=2010)
@@ -27,7 +29,7 @@ class Artwork(models.Model):
         )
 
     def get_absolute_url(self):
-        return reverse('phobias:artwork_instance', kwargs={'pk': self.pk})
+        return reverse('phobias:artwork_instance', kwargs={'slug': self.slug})
 
 
 class TaggedReview(TaggedItemBase):
