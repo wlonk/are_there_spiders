@@ -317,3 +317,10 @@ LOGGING = {
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
 WSGI_APPLICATION = 'wsgi.application'
 ########## END WSGI CONFIGURATION
+
+
+########## PHOBIAS CONFIGURATION
+# These settings are REQUIRED.
+ARTWORK_PAGINATION_NUMBER = 20
+REVIEW_PAGINATION_NUMBER = 1
+########## END PHOBIAS CONFIGURATION

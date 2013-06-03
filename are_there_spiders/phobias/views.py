@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView
@@ -14,6 +16,7 @@ from .models import Review, Artwork
 class CollectionView(ListView):
     model = Artwork
     template_name = 'phobias/artwork_list.html'
+    paginate_by = settings.ARTWORK_PAGINATION_NUMBER
 
 
 class CreateView(LoginRequiredMixin, FormView):
@@ -30,7 +33,7 @@ class CreateView(LoginRequiredMixin, FormView):
 
         initial = {}
         try:
-            artwork = Artwork.objects.get(pk=self.request.GET.get('artwork'))
+            artwork = Artwork.objects.get(slug=self.request.GET.get('artwork'))
         except (Artwork.DoesNotExist, Artwork.MultipleObjectReturned):
             pass
         else:
@@ -50,13 +53,35 @@ class ArtworkInstanceView(DetailView):
     template_name = 'phobias/artwork_instance.html'
 
     def get_context_data(self, *args, **kwargs):
-        context = super(ArtworkInstanceView, self).get_context_data(*args, **kwargs)
+        # Get the default context
+        context = super(ArtworkInstanceView, self).get_context_data(
+            *args,
+            **kwargs
+        )
+
+        # Paginate reviews
+        reviews = context['artwork'].review_set.all()
+        paginator = Paginator(reviews, settings.REVIEW_PAGINATION_NUMBER)
+        page = self.request.GET.get('page', 1)
+        try:
+            reviews = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            reviews = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range, deliver last page of results.
+            reviews = paginator.page(paginator.num_pages)
+        context['reviews'] = reviews
+        context['is_paginated'] = paginator.num_pages > 1
+        context['page_obj'] = reviews
+
+        # Determine whether this user has reviewed this artwork
         user = self.request.user
+        context['reviewed_this_artwork'] = False
         if user.is_authenticated():
             if context['artwork'].review_set.filter(user=user).count() > 0:
-                context['review_on_page'] = True
-            else:
-                context['review_on_page'] = False
+                context['reviewed_this_artwork'] = True
+
         return context
 
 

@@ -24,7 +24,7 @@
   </tbody>
 </table>
 
-{% for review in artwork.review_set.all %}
+{% for review in reviews %}
 <div class="review well">
   <h2 class="review-author">{{ review.user.username }}'s review</h2>
   <table class="table table-bordered">
@@ -58,7 +58,10 @@
   <p>No reviews</p>
 </div>
 {% endfor %}
-{% if user.is_authenticated and not review_on_page %}
+
+{% include '_pagination.html' %}
+
+{% if user.is_authenticated and not reviewed_this_artwork %}
 <div class="new">
   <a href="{% url 'phobias:new' %}?artwork={{ artwork.slug }}" class="btn">add</a>
 </div>

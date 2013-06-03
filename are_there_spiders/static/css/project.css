@@ -37,3 +37,9 @@ th {
     text-align: right;
     width: 150px;
 }
+
+div.pagination {
+    text-align: center;
+    font-size: x-large;
+    text-decoration: none;
+}
