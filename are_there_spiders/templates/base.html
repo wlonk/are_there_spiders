@@ -33,7 +33,7 @@
           <a class="brand" href="/">Are there spiders?</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li><a href="{% url 'phobias:collection' %}">List of media</a></li>
+              <li><a href="{% url 'phobias:collection' kind='book' %}">List of media</a></li>
               {% if user.is_authenticated %}
               <li><a href="{% url 'phobias:new' %}">New</a></li>
               <li><a href="#">{{ user.username }}</a></li>

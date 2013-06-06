@@ -1,5 +1,3 @@
-Pagination
-Filter by media type (tabs on reviews page?)
 Search by title + media type
 Review flagging
 Javascript-y auto-fill, so if you start reviewing limbo, it'll auto-fill the rest of the fields on Limbo for you

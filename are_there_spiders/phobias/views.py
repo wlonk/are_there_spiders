@@ -18,6 +18,18 @@ class CollectionView(ListView):
     template_name = 'phobias/artwork_list.html'
     paginate_by = settings.ARTWORK_PAGINATION_NUMBER
 
+    def get_queryset(self):
+        ret = super(CollectionView, self).get_queryset()
+        if 'kind' not in self.kwargs:
+            return ret
+        return ret.filter(kind=self.kwargs['kind'])
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(CollectionView, self).get_context_data(*args, **kwargs)
+        context['artwork_kinds'] = Artwork.ARTWORK_CHOICES
+        context['active'] = self.kwargs.get('kind', '')
+        return context
+
 
 class CreateView(LoginRequiredMixin, FormView):
     form_class = ReviewForm
