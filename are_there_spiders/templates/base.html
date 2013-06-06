@@ -39,7 +39,7 @@
               <li><a href="#">{{ user.username }}</a></li>
               <li><a href="{% url 'auth_logout' %}">Logout</a></li>
               {% else %}
-              <li><a href="{% url 'auth_login' %}">Login</a></li>
+              <li><a href="{% url 'auth_login' %}{{ login_next }}">Login</a></li>
               <li><a href="{% url 'registration_register' %}">Sign up</a></li>
               {% endif %}
             </ul>

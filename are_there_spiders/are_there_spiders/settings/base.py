@@ -198,6 +198,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
+    'are_there_spiders.context_processors.login_next',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-loaders
