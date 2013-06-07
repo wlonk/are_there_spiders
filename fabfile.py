@@ -15,15 +15,7 @@ def github(branch='master'):
     )
     if branch not in allowed_branches:
         return
-    local('git push origin %s' % branch)
-
-
-@task
-def tags():
-    """
-    Push tags to GitHub.
-    """
-    local('git push --tags')
+    local('git push origin %s --tags' % branch)
 
 
 @task
@@ -73,7 +65,6 @@ def all():
     """
     github('master')
     github('develop')
-    tags()
     heroku()
     # syncdb()
     migrate()
