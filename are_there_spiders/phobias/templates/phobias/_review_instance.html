@@ -1,0 +1,41 @@
+{% load markup %}
+<div class="review well">
+  <h2 class="review-author">
+    {{ review.user.username }}'s review
+    {% if user.is_authenticated and review.user != user %}
+    <span class="pull-right spam-information">
+      {% if review.flagged_count > 0 %}
+      {{ review.flagged_count }}
+      {% endif %}
+      <a class="flag-as-spam" href="{% url 'phobias:flag' pk=review.pk %}" title="Flag review">
+        <i class="icon-flag{% if user in review.flagged_by.all %} icon-red{% endif %}"></i>
+      </a>
+    </span>
+    {% endif %}
+  </h2>
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <th>Spider quantity:</th>
+        <td>{{ review.get_spider_quantity_display }}</td>
+      </tr>
+      <tr>
+        <th>Spider quality:</th>
+        <td>
+          {% for tag in review.spider_quality.all %}
+          <a href="#" class="label label-info">{{ tag }}</a>
+          {% empty %}
+          no tags
+          {% endfor %}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="summary">{{ review.summary|markdown }}</div>
+  {% if review.user == user %}
+  <div id="edit-delete">
+    <a href="{% url 'phobias:edit' pk=review.pk %}" class="btn">edit</a>
+    <a href="{% url 'phobias:delete' pk=review.pk %}" class="btn btn-danger">delete</a>
+  </div>
+  {% endif %}
+</div>

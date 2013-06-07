@@ -8,45 +8,18 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'Artwork'
-        db.create_table(u'phobias_artwork', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('slug', self.gf('autoslug.fields.AutoSlugField')(unique=True, max_length=50, populate_from='name', unique_with=())),
-            ('kind', self.gf('django.db.models.fields.CharField')(max_length=10)),
-            ('creator', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('year', self.gf('django.db.models.fields.IntegerField')(default=2010)),
+        # Adding M2M table for field flagged_by on 'Review'
+        db.create_table(u'phobias_review_flagged_by', (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('review', models.ForeignKey(orm[u'phobias.review'], null=False)),
+            ('user', models.ForeignKey(orm[u'auth.user'], null=False))
         ))
-        db.send_create_signal(u'phobias', ['Artwork'])
-
-        # Adding model 'TaggedReview'
-        db.create_table(u'phobias_taggedreview', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('tag', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'phobias_taggedreview_items', to=orm['taggit.Tag'])),
-            ('content_object', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['phobias.Review'])),
-        ))
-        db.send_create_signal(u'phobias', ['TaggedReview'])
-
-        # Adding model 'Review'
-        db.create_table(u'phobias_review', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
-            ('artwork', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['phobias.Artwork'])),
-            ('spider_quantity', self.gf('django.db.models.fields.CharField')(max_length=10)),
-            ('summary', self.gf('django.db.models.fields.TextField')(max_length=1000, blank=True)),
-        ))
-        db.send_create_signal(u'phobias', ['Review'])
+        db.create_unique(u'phobias_review_flagged_by', ['review_id', 'user_id'])
 
 
     def backwards(self, orm):
-        # Deleting model 'Artwork'
-        db.delete_table(u'phobias_artwork')
-
-        # Deleting model 'TaggedReview'
-        db.delete_table(u'phobias_taggedreview')
-
-        # Deleting model 'Review'
-        db.delete_table(u'phobias_review')
+        # Removing M2M table for field flagged_by on 'Review'
+        db.delete_table('phobias_review_flagged_by')
 
 
     models = {
@@ -98,6 +71,7 @@ class Migration(SchemaMigration):
         u'phobias.review': {
             'Meta': {'object_name': 'Review'},
             'artwork': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['phobias.Artwork']"}),
+            'flagged_by': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'flagged_reviews'", 'symmetrical': 'False', 'to': u"orm['auth.User']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'spider_quantity': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
             'summary': ('django.db.models.fields.TextField', [], {'max_length': '1000', 'blank': 'True'}),

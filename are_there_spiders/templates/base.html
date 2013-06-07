@@ -33,16 +33,19 @@
           <a class="brand" href="/">Are there spiders?</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li><a href="{% url 'phobias:collection' %}">List of media</a></li>
+              <li><a href="{% url 'phobias:collection' kind='book' %}">List of media</a></li>
               {% if user.is_authenticated %}
               <li><a href="{% url 'phobias:new' %}">New</a></li>
               <li><a href="#">{{ user.username }}</a></li>
               <li><a href="{% url 'auth_logout' %}">Logout</a></li>
               {% else %}
-              <li><a href="{% url 'auth_login' %}">Login</a></li>
+              <li><a href="{% url 'auth_login' %}{{ login_next }}">Login</a></li>
               <li><a href="{% url 'registration_register' %}">Sign up</a></li>
               {% endif %}
             </ul>
+            <form class="navbar-search pull-right" method="get" action="{% url 'phobias:search' %}">
+              <input type="text" class="search-query" placeholder="Search" name='q'>
+            </form>
           </div><!--/.nav-collapse -->
         </div>
       </div>

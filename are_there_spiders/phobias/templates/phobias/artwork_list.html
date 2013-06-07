@@ -5,11 +5,27 @@
 {% block page_title %}Reviews{% endblock page_title %}
 
 {% block content %}
+
+<ul class="nav nav-tabs">
+  {% for artwork_kind_slug, artwork_kind_display in artwork_kinds %}
+  <li{% if active == artwork_kind_slug %} class="active"{% endif %}>
+    <a href="{% url 'phobias:collection' kind=artwork_kind_slug %}">{{ artwork_kind_display }}</a>
+  </li>
+  {% empty %}
+  <li>Sorry, there's a problem with navigation.</li>
+  {% endfor %}
+</ul>
+
 <ul>
 {% for obj in object_list %}
-  <li><a href="{{ obj.get_absolute_url }}">{{ obj }}</a></li>
+  <li><a href="{{ obj.get_absolute_url }}">
+    {% include 'phobias/_artwork_list_entry.html' %}
+  </a></li>
 {% empty %}
   <li>Sorry, no reviews</li>
 {% endfor %}
 </ul>
+
+{% include '_pagination.html' %}
+
 {% endblock content %}

@@ -1,6 +1,6 @@
 """Common settings and globals."""
 
-VERSION = '0.4.4'
+VERSION = '0.5.0'
 
 import dj_database_url
 from os.path import abspath, basename, dirname, join, normpath
@@ -198,6 +198,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
+    'are_there_spiders.context_processors.login_next',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-loaders
@@ -317,3 +318,10 @@ LOGGING = {
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
 WSGI_APPLICATION = 'wsgi.application'
 ########## END WSGI CONFIGURATION
+
+
+########## PHOBIAS CONFIGURATION
+# These settings are REQUIRED.
+ARTWORK_PAGINATION_NUMBER = 20
+REVIEW_PAGINATION_NUMBER = 20
+########## END PHOBIAS CONFIGURATION

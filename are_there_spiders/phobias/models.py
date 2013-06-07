@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 
+from autoslug import AutoSlugField
 from taggit.managers import TaggableManager
 from taggit.models import TaggedItemBase
 
@@ -15,6 +16,7 @@ class Artwork(models.Model):
     )
 
     name = models.CharField(max_length=100)
+    slug = AutoSlugField(populate_from='name', unique=True, db_index=True)
     kind = models.CharField(max_length=10, choices=ARTWORK_CHOICES)
     creator = models.CharField(max_length=100)
     year = models.IntegerField(default=2010)
@@ -27,7 +29,10 @@ class Artwork(models.Model):
         )
 
     def get_absolute_url(self):
-        return reverse('phobias:artwork_instance', kwargs={'pk': self.pk})
+        return reverse('phobias:artwork_instance', kwargs={'slug': self.slug})
+
+    def active_reviews(self):
+        return self.review_set.filter(marked_as_spam=False)
 
 
 class TaggedReview(TaggedItemBase):
@@ -55,6 +60,15 @@ class Review(models.Model):
         verbose_name=u'Spider quality'
     )
     summary = models.TextField(max_length=1000, blank=True)
+    flagged_by = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name='flagged_reviews'
+    )
+    marked_as_spam = models.BooleanField(default=False)
+
+    @property
+    def flagged_count(self):
+        return self.flagged_by.count()
 
     def __unicode__(self):
         return "%s by %s" % (
