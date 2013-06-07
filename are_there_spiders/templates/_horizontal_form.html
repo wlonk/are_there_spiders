@@ -1,3 +1,4 @@
+{% load phobias %}
 {% csrf_token %}
 {% if form.non_field_errors %}
   {% for error in form.non_field_errors %}
@@ -8,7 +9,11 @@
 <div class="control-group{% if field.errors %} error{% endif %}">
   <label class="control-label{% if field.field.required %} required{% endif %}" for="{{ field.html_name }}">{{ field.label }}</label>
   <div class="controls">
-    {{ field }}
+    {% if forloop.first %}
+      {{ field|autofocus }}
+    {% else %}
+      {{ field }}
+    {% endif %}
     {% if field.errors %}
       {% for error in field.errors %}
         <span class="help-inline">{{ error }}</span>
