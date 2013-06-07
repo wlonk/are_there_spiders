@@ -21,6 +21,11 @@ body > .container {
     padding: 10px;
 }
 
+.brand img {
+    height: 20px;
+    vertical-align: bottom;
+}
+
 .required {
     font-weight: bold;
 }

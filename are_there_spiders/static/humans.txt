@@ -1,0 +1,18 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Joe Mcdaldno -- concept and cheerleading -- @mcdaldno
+    Kit La Touche -- coding skills and terrible graphic sense -- @wlonk
+
+
+# TECHNOLOGY COLOPHON
+
+    HTML5
+    CSS3
+    Bootstrap
+    jQuery
+    Heroku
+    Django
+    Magial ponies
