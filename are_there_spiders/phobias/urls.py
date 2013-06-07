@@ -5,6 +5,7 @@ from django.views.generic.base import RedirectView
 from .views import (
     CollectionView,
     CreateView,
+    FlagReviewView,
     ArtworkInstanceView,
     EditView,
     DeleteView,
@@ -34,6 +35,11 @@ urlpatterns = patterns(
         r'^reviews/(?P<pk>[^/]+)/delete/$',
         DeleteView.as_view(),
         name='delete'
+    ),
+    url(
+        r'^reviews/(?P<pk>[^/]+)/flag/$',
+        FlagReviewView.as_view(),
+        name='flag'
     ),
     url(r'search/$', SearchView.as_view(), name='search'),
     # Fallthrough to this:

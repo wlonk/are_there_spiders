@@ -31,6 +31,9 @@ class Artwork(models.Model):
     def get_absolute_url(self):
         return reverse('phobias:artwork_instance', kwargs={'slug': self.slug})
 
+    def active_reviews(self):
+        return self.review_set.filter(marked_as_spam=False)
+
 
 class TaggedReview(TaggedItemBase):
     content_object = models.ForeignKey('Review')
@@ -57,6 +60,15 @@ class Review(models.Model):
         verbose_name=u'Spider quality'
     )
     summary = models.TextField(max_length=1000, blank=True)
+    flagged_by = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name='flagged_reviews'
+    )
+    marked_as_spam = models.BooleanField(default=False)
+
+    @property
+    def flagged_count(self):
+        return self.flagged_by.count()
 
     def __unicode__(self):
         return "%s by %s" % (

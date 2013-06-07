@@ -2,8 +2,9 @@ from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse_lazy
 from django.db.models import Q
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
+from django.views.generic.base import View
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import FormView, DeleteView
 
@@ -61,6 +62,18 @@ class CreateView(LoginRequiredMixin, FormView):
         return redirect(review.artwork)
 
 
+class FlagReviewView(LoginRequiredMixin, View):
+
+    def get(self, request, pk):
+        review = get_object_or_404(Review, pk=pk)
+        user = request.user
+        if user in review.flagged_by.all():
+            review.flagged_by.remove(user)
+        else:
+            review.flagged_by.add(user)
+        return redirect(review.artwork)
+
+
 class ArtworkInstanceView(DetailView):
     model = Artwork
     template_name = 'phobias/artwork_instance.html'
@@ -73,7 +86,7 @@ class ArtworkInstanceView(DetailView):
         )
 
         # Paginate reviews
-        reviews = context['artwork'].review_set.all()
+        reviews = context['artwork'].active_reviews()
         paginator = Paginator(reviews, settings.REVIEW_PAGINATION_NUMBER)
         page = self.request.GET.get('page', 1)
         try:

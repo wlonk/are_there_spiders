@@ -1,5 +1,3 @@
-Search by title + media type
-Review flagging
 Javascript-y auto-fill, so if you start reviewing limbo, it'll auto-fill the rest of the fields on Limbo for you
 Add timestamps on reviews
 Add favicon/logo
@@ -9,3 +7,4 @@ Add better logging
 Images on media?
 Write docs?
 Write tests?
+Add user profiles?

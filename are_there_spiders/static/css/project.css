@@ -43,3 +43,19 @@ div.pagination {
     font-size: x-large;
     text-decoration: none;
 }
+
+.spam-information {
+    font-size: 10pt;
+    opacity: 0.3;
+}
+
+.spam-information:hover {
+    opacity: 1.0;
+}
+
+/* Customizing Bootstrap */
+/* Red icons with optional class, or on hover/focus/active states of certain elements */
+
+.icon-red {
+  background-image: url("../img/glyphicons-halflings-red.png");
+}
