@@ -1,18 +1,27 @@
-{% load markup %}
-<div class="review well">
-  <h2 class="review-author">
-    {{ review.user.username }}'s review
-    {% if user.is_authenticated and review.user != user %}
-    <span class="pull-right spam-information">
-      {% if review.flagged_count > 0 %}
-      {{ review.flagged_count }}
+{% load markup humanize %}
+<div class="review well" id="{{ review.pk }}">
+  <div class="row-fluid">
+    <div class="span8">
+      <h2 class="review-author">{{ review.user.username }} says</h2>
+    </div>
+    <div class="span4">
+      {% if user.is_authenticated and review.user != user %}
+      <div class="spam-information">
+        {% if review.flagged_count > 0 %}
+          {{ review.flagged_count }}
+        {% endif %}
+        <a class="flag-as-spam" href="{% url 'phobias:flag' pk=review.pk %}" title="Flag review">
+          <i class="icon-flag{% if user in review.flagged_by.all %} icon-red{% endif %}"></i>
+        </a>
+      </div>
+      {% else %}
+      <div class="spaceholder"></div>
       {% endif %}
-      <a class="flag-as-spam" href="{% url 'phobias:flag' pk=review.pk %}" title="Flag review">
-        <i class="icon-flag{% if user in review.flagged_by.all %} icon-red{% endif %}"></i>
-      </a>
-    </span>
-    {% endif %}
-  </h2>
+      <div class="review-date">
+        Created {{ review.created|naturaltime }}{% if review.created != review.updated %}, last edited {{ review.updated|naturaltime }}{% endif %}.
+      </div>
+    </div>
+  </div>
   <table class="table table-bordered">
     <tbody>
       <tr>

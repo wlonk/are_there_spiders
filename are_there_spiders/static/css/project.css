@@ -44,18 +44,32 @@ div.pagination {
     text-decoration: none;
 }
 
+.review-author {
+    line-height: 66%;
+}
+
+.spaceholder {
+    height: 20px; /* The same as the spam-information div. */
+}
+
 .spam-information {
-    font-size: 10pt;
     opacity: 0.3;
+    text-align: right;
 }
 
 .spam-information:hover {
     opacity: 1.0;
 }
 
+.review-date {
+    font-style: italic;
+    color: gray;
+    font-size: smaller;
+    text-align: right;
+}
+
 /* Customizing Bootstrap */
 /* Red icons with optional class, or on hover/focus/active states of certain elements */
-
 .icon-red {
   background-image: url("../img/glyphicons-halflings-red.png");
 }
