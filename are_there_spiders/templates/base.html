@@ -42,6 +42,9 @@
               <li><a href="{% url 'auth_login' %}{{ login_next }}">Login</a></li>
               <li><a href="{% url 'registration_register' %}">Sign up</a></li>
               {% endif %}
+              {% if user.is_staff %}
+              <li><a href="{% url 'admin:index' %}">admin</a></li>
+              {% endif %}
             </ul>
             <form class="navbar-search pull-right" method="get" action="{% url 'phobias:search' %}">
               <input type="text" class="search-query" placeholder="Search" name='q'>
