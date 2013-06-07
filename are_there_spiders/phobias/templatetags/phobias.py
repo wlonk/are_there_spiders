@@ -44,3 +44,9 @@ def qs(parser, token):
         name, value = match.groups()
         kwargs[name] = value
     return QueryStringNode(dict_or_multidict, kwargs)
+
+
+@register.filter
+def autofocus(field):
+    field.field.widget.attrs['autofocus'] = '1'
+    return field

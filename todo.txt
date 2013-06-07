@@ -1,7 +1,7 @@
+Add custom Error and Maintenance pages
 Javascript-y auto-fill, so if you start reviewing limbo, it'll auto-fill the rest of the fields on Limbo for you
 Add timestamps on reviews
 Add favicon/logo
-Fix tabindex issues
 Add New Relic tracking
 Add better logging
 Images on media?

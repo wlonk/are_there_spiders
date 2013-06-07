@@ -1,6 +1,6 @@
 """Common settings and globals."""
 
-VERSION = '0.5.0'
+VERSION = '0.5.1'
 
 import dj_database_url
 from os.path import abspath, basename, dirname, join, normpath
@@ -245,7 +245,7 @@ DJANGO_APPS = (
     'django.contrib.staticfiles',
 
     # Useful template tags:
-    # 'django.contrib.humanize',
+    'django.contrib.humanize',
     'django.contrib.markup',
 
     # Admin panel and documentation:

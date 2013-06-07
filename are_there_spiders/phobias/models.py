@@ -50,6 +50,8 @@ class Review(models.Model):
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     artwork = models.ForeignKey(Artwork)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
     spider_quantity = models.CharField(
         max_length=10,
         choices=SPIDER_QUANTITY_CHOICES
