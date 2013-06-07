@@ -5,3 +5,5 @@ Add better logging
 Write docs?
 Write tests?
 Add user profiles?
+Add social auth?
+Improve graphic design
