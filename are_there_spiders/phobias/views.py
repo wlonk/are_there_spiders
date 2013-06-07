@@ -150,6 +150,8 @@ class SearchView(CollectionView):
     def get_queryset(self):
         q = self.kwargs.get('q', '')
         ret = super(SearchView, self).get_queryset()
+        if not q:
+            return ret.none()
         return ret.filter(
             Q(name__icontains=q) |
             Q(creator__icontains=q)
