@@ -7,7 +7,8 @@ from .views import (
     CreateView,
     ArtworkInstanceView,
     EditView,
-    DeleteView
+    DeleteView,
+    SearchView
 )
 
 urlpatterns = patterns(
@@ -34,6 +35,7 @@ urlpatterns = patterns(
         DeleteView.as_view(),
         name='delete'
     ),
+    url(r'search/$', SearchView.as_view(), name='search'),
     # Fallthrough to this:
     url(r'(?P<kind>[^/]+)/$', CollectionView.as_view(), name='collection'),
 )

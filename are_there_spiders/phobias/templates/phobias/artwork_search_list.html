@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Search results for "{{ request.GET.q }}"{% endblock %}
+
+{% block page_title %}Search results for "{{ request.GET.q }}"{% endblock page_title %}
+
+{% block content %}
+
+<ul>
+{% for obj in object_list %}
+  <li><a href="{{ obj.get_absolute_url }}">
+    {% include 'phobias/_artwork_list_entry.html' %}
+  </a></li>
+{% empty %}
+  <li>Sorry, no reviews</li>
+{% endfor %}
+</ul>
+
+{% include '_pagination.html' %}
+
+{% endblock content %}

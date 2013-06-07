@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse_lazy
+from django.db.models import Q
 from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.detail import SingleObjectMixin
@@ -139,3 +140,17 @@ class DeleteView(OwnerRequiredMixin, DeleteView):
     template_name = 'phobias/review_confirm_delete.html'
     # Seems ugly that we have to namespace this in the app.
     success_url = reverse_lazy('phobias:collection')
+
+
+class SearchView(CollectionView):
+    model = Artwork
+    template_name = 'phobias/artwork_search_list.html'
+    paginate_by = settings.ARTWORK_PAGINATION_NUMBER
+
+    def get_queryset(self):
+        q = self.kwargs.get('q', '')
+        ret = super(SearchView, self).get_queryset()
+        return ret.filter(
+            Q(name__icontains=q) |
+            Q(creator__icontains=q)
+        )

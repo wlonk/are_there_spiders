@@ -18,7 +18,9 @@
 
 <ul>
 {% for obj in object_list %}
-  <li><a href="{{ obj.get_absolute_url }}">{{ obj }}</a></li>
+  <li><a href="{{ obj.get_absolute_url }}">
+    {% include 'phobias/_artwork_list_entry.html' %}
+  </a></li>
 {% empty %}
   <li>Sorry, no reviews</li>
 {% endfor %}
