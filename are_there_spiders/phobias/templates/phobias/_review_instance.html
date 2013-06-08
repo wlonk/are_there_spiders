@@ -6,7 +6,7 @@
     </div>
     <div class="span4">
       {% if user.is_authenticated and review.user != user %}
-      <div class="spam-information">
+      <div class="spam-information{% if user in review.flagged_by.all %} full-opacity{% endif %}">
         {% if review.flagged_count > 0 %}
           {{ review.flagged_count }}
         {% endif %}
@@ -32,7 +32,7 @@
         <th>Spider quality:</th>
         <td>
           {% for tag in review.spider_quality.all %}
-          <a href="#" class="label label-info">{{ tag }}</a>
+          <a href="#" class="label label-info">{{ tag }}</a>{% if not forloop.last %}&nbsp;{% endif %}
           {% empty %}
           no tags
           {% endfor %}
@@ -42,9 +42,9 @@
   </table>
   <div id="summary">{{ review.summary|markdown }}</div>
   {% if review.user == user %}
-  <div id="edit-delete">
-    <a href="{% url 'phobias:edit' pk=review.pk %}" class="btn">edit</a>
-    <a href="{% url 'phobias:delete' pk=review.pk %}" class="btn btn-danger">delete</a>
+  <div id="edit-delete" class="btn-group pull-right">
+    <a href="{% url 'phobias:edit' pk=review.pk %}" class="btn btn-small btn-primary">edit</a>
+    <a href="{% url 'phobias:delete' pk=review.pk %}" class="btn btn-small btn-danger">delete</a>
   </div>
   {% endif %}
 </div>

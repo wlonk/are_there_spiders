@@ -8,8 +8,8 @@
 <form class="form-horizontal" action="{% url 'registration_register' %}" method="post">
   {% include "_horizontal_form.html" %}
   <div class="control-group">
-    <div class="controls">
-      <button type="submit" class="btn">sign up</button>
+    <div class="controls pull-right">
+      <button type="submit" class="btn btn-small btn-primary">sign up</button>
     </div>
   </div>
   <input type="hidden" name="next" value="{{ next }}" />

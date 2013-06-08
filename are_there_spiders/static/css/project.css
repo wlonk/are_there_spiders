@@ -65,6 +65,9 @@ div.pagination {
 .spam-information:hover {
     opacity: 1.0;
 }
+.spam-information.full-opacity {
+    opacity: 1.0;
+}
 
 .review-date {
     font-style: italic;
