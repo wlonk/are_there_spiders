@@ -1,6 +1,6 @@
 """Common settings and globals."""
 
-VERSION = '0.5.3'
+VERSION = '0.5.4'
 
 import dj_database_url
 from os.path import abspath, basename, dirname, join, normpath
