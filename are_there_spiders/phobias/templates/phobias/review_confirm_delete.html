@@ -11,8 +11,8 @@
 <form class="form-horizontal" action="{% url 'phobias:delete' pk=review.pk %}" method="post">
   {% csrf_token %}
   <div class="control-group">
-    <div class="controls">
-      <button type="submit" class="btn btn-danger">delete</button>
+    <div class="controls pull-right">
+      <button type="submit" class="btn btn-small btn-danger">delete</button>
     </div>
   </div>
 </form>
