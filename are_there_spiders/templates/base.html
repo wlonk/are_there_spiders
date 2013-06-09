@@ -16,8 +16,7 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <!-- Use this to quickly test CSS changes in a template,
-        then move to project.css -->
+    <!-- Use this to quickly test CSS changes in a template, then move to project.css -->
     {% block extra_css %}{% endblock extra_css %}
   </head>
 
@@ -25,7 +24,14 @@
 
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
-        <div class="container">
+        <div class="container-fluid">
+          <!-- BEGIN RESPONSIVE JOY This makes the navbar expandable on small screens -->
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!-- END RESPONSIVE JOY -->
           <a class="brand" href="/"><img src="{% static 'img/logo.png' %}" alt="Logo" /> Are there spiders?</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
