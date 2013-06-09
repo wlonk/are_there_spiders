@@ -7,6 +7,9 @@
 {% block content %}
 <form class="form-horizontal" action="{% url 'auth_login' %}" method="post">
   {% include "_horizontal_form.html" %}
+  {% if 'next' in request.REQUEST %}
+  <input type="hidden" name="next" value="{{ request.REQUEST.next }}">
+  {% endif %}
   <div class="control-group">
     <div class="controls pull-right">
       <button type="submit" class="btn btn-small btn-primary">log in</button>
