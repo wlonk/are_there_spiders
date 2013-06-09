@@ -17,7 +17,7 @@ urlpatterns = patterns(
     url(
         r'^$',
         RedirectView.as_view(url=reverse_lazy(
-            'collection',
+            'phobias:collection',
             kwargs={
                 'kind': 'book'
             }
