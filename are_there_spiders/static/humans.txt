@@ -15,4 +15,4 @@
     jQuery
     Heroku
     Django
-    Magial ponies
+    Magical ponies
