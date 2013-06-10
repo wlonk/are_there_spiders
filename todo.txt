@@ -1,3 +1,5 @@
+Persist search term in search box
+Fix search bug (no results!)
 Add custom Error and Maintenance pages
 Javascript-y auto-fill, so if you start reviewing limbo, it'll auto-fill the rest of the fields on Limbo for you
 Add New Relic tracking
