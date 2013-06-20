@@ -49,7 +49,7 @@
               {% endif %}
             </ul>
             <form class="navbar-search pull-right" method="get" action="{% url 'phobias:search' %}">
-              <input type="search" class="search-query" placeholder="Search" name='q'>
+              <input type="search" class="search-query" placeholder="Search" name='q' value="{{ request.GET.q }}">
             </form>
           </div><!--/.nav-collapse -->
         </div>
