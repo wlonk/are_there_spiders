@@ -161,7 +161,7 @@ class SearchView(CollectionView):
     paginate_by = settings.ARTWORK_PAGINATION_NUMBER
 
     def get_queryset(self):
-        q = self.kwargs.get('q', '')
+        q = self.request.GET.get('q', '')
         ret = super(SearchView, self).get_queryset()
         if not q:
             return ret.none()
