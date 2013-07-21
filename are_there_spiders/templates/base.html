@@ -32,7 +32,7 @@
             <span class="icon-bar"></span>
           </button>
           <!-- END RESPONSIVE JOY -->
-          <a class="brand" href="/"><img src="{% static 'img/logo.png' %}" alt="Logo" /> Are there spiders?</a>
+          <a class="brand" href="/"><img src="{% static 'img/logo.png' %}" alt="Logo"> Are there spiders?</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li><a href="{% url 'phobias:collection' kind='book' %}">List of media</a></li>
@@ -58,9 +58,11 @@
 
     <div class="container">
 
+      {% block content %}
+      <img id="logo-hero" src="{% static 'img/logo-hero.png' %}">
+
       <h1>{% block page_title %}Are there spiders?{% endblock page_title %}</h1>
 
-      {% block content %}
       <p>
         I'm afraid of spiders. The sight of one on screen can trigger a panic response in me, even if its role in a movie or other media is fairly innocuous. The worst is when I'm not expecting it&mdash;when I don't see it coming.
       </p>
