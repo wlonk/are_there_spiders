@@ -1,6 +1,6 @@
 """Common settings and globals."""
 
-VERSION = '0.6.0'
+VERSION = '0.6.1'
 
 import dj_database_url
 from os.path import abspath, basename, dirname, join, normpath
@@ -276,7 +276,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 ########## REGISTRATION CONFIGURATION
 ACCOUNT_ACTIVATION_DAYS = 7
-REGISTRATION_OPEN = False
+REGISTRATION_OPEN = True
 DEFAULT_FROM_EMAIL = 'Are there spiders <no-reply@aretherespiders.com>'
 ########## END REGISTRATION CONFIGURATION
 

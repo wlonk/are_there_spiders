@@ -24,4 +24,4 @@ class PatchedCachedFilesMixin(CachedFilesMixin):
 
 
 class S3PipelineStorage(PipelineMixin, PatchedCachedFilesMixin, S3BotoStorage):
-     pass
+    pass

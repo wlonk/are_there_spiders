@@ -26,6 +26,13 @@ body > .container {
     vertical-align: bottom;
 }
 
+#logo-hero {
+    display: block;
+    margin: 0 auto;
+    width: 585px;
+    height: 314px;
+}
+
 .required {
     font-weight: bold;
 }
