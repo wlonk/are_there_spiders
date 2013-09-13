@@ -12,14 +12,20 @@ class Artwork(models.Model):
         ('book', 'Book'),
         ('movie', 'Movie'),
         ('videogame', 'Video Game'),
+        ('show', 'Show/Series'),
         ('other', 'Other'),
     )
 
     name = models.CharField(max_length=100)
     slug = AutoSlugField(populate_from='name', unique=True, db_index=True)
     kind = models.CharField(max_length=10, choices=ARTWORK_CHOICES)
-    creator = models.CharField(max_length=100)
-    year = models.IntegerField(default=2010)
+    creator = models.CharField(
+        max_length=100,
+        null=True,
+        default=None,
+        blank=True
+    )
+    year = models.IntegerField(null=True, default=None, blank=True)
 
     def __unicode__(self):
         return "%s's %s (%s)" % (
@@ -52,6 +58,8 @@ class Review(models.Model):
     artwork = models.ForeignKey(Artwork)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    season = models.CharField(max_length=50, blank=True)
+    episode = models.CharField(max_length=50, blank=True)
     spider_quantity = models.CharField(
         max_length=10,
         choices=SPIDER_QUANTITY_CHOICES

@@ -5,8 +5,11 @@
     <div class="alert alert-error">{{ error }}</div>
   {% endfor %}
 {% endif %}
-{% for field in form %}
-<div class="control-group{% if field.errors %} error{% endif %}">
+{% for field in form.hidden_fields %}
+  {{ field }}
+{% endfor %}
+{% for field in form.visible_fields %}
+<div class="control-group{% if field.errors %} error{% endif %}" id="{{field.name}}_control_group">
   <label class="control-label{% if field.field.required %} required{% endif %}" for="{{ field.html_name }}">{{ field.label }}</label>
   <div class="controls">
     {% if forloop.first %}

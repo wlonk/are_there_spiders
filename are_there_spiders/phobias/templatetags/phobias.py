@@ -48,5 +48,5 @@ def qs(parser, token):
 
 @register.filter
 def autofocus(field):
-    field.field.widget.attrs['autofocus'] = '1'
+    field.field.widget.attrs['autofocus'] = 'autofocus'
     return field

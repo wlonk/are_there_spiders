@@ -7,6 +7,7 @@
 {% block page_title %}Delete review{% endblock page_title %}
 
 {% block content %}
+<h1>Really?</h1>
 <p>Are you sure you want to delete this review?</p>
 <form class="form-horizontal" action="{% url 'phobias:delete' pk=review.pk %}" method="post">
   {% csrf_token %}

@@ -24,6 +24,20 @@
   </div>
   <table class="table table-bordered">
     <tbody>
+      {% if artwork.kind == 'show' %}
+        {% if review.season %}
+          <tr>
+            <th>Season:</th>
+            <td>{{ review.season }}</td>
+          </tr>
+        {% endif %}
+        {% if review.episode %}
+          <tr>
+            <th>Episode:</th>
+            <td>{{ review.episode }}</td>
+          </tr>
+        {% endif %}
+      {% endif %}
       <tr>
         <th>Spider quantity:</th>
         <td>{{ review.get_spider_quantity_display }}</td>
