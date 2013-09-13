@@ -105,8 +105,10 @@ class ArtworkInstanceView(DetailView):
         user = self.request.user
         context['reviewed_this_artwork'] = False
         if user.is_authenticated():
-            if context['artwork'].review_set.filter(user=user).count() > 0:
+            if context['artwork'].review_set.filter(user=user).exists():
                 context['reviewed_this_artwork'] = True
+            if context['artwork'].kind == 'show':
+                context['reviewed_this_artwork'] = False
 
         return context
 
@@ -133,10 +135,13 @@ class EditView(SingleObjectMixin, OwnerRequiredMixin, FormView):
         # @todo: this isn't very DRY.
         artwork = review.artwork
         initial = dict(
+            review_id=review.pk,
             artwork_name=artwork.name,
             artwork_kind=artwork.kind,
             artwork_creator=artwork.creator,
             artwork_year=artwork.year,
+            artwork_season=review.season,
+            artwork_episode=review.episode,
             spider_quantity=review.spider_quantity,
             spider_quality=edit_string_for_tags(review.spider_quality.all()),
             summary=review.summary
@@ -151,8 +156,13 @@ class EditView(SingleObjectMixin, OwnerRequiredMixin, FormView):
 class DeleteView(OwnerRequiredMixin, DeleteView):
     model = Review
     template_name = 'phobias/review_confirm_delete.html'
-    # Seems ugly that we have to namespace this in the app.
-    success_url = reverse_lazy('phobias:collection')
+
+    def get_success_url(self):
+        # Seems ugly that we have to namespace this in the app.
+        return reverse_lazy(
+            'phobias:artwork_instance',
+            kwargs={'slug': self.object.artwork.slug}
+        )
 
 
 class SearchView(CollectionView):

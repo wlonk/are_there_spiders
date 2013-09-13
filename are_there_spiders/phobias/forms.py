@@ -6,10 +6,16 @@ from .models import Artwork, Review
 
 
 class ReviewForm(forms.Form):
+    review_id = forms.IntegerField(
+        widget=forms.HiddenInput,
+        required=False
+    )
     artwork_name = forms.CharField()
     artwork_kind = forms.ChoiceField(choices=Artwork.ARTWORK_CHOICES)
     artwork_creator = forms.CharField()
     artwork_year = forms.IntegerField()
+    artwork_season = forms.CharField(required=False)
+    artwork_episode = forms.CharField(required=False)
 
     spider_quantity = forms.ChoiceField(
         choices=Review.SPIDER_QUANTITY_CHOICES
@@ -33,12 +39,22 @@ class ReviewForm(forms.Form):
             name=self.cleaned_data['artwork_name'],
             kind=self.cleaned_data['artwork_kind'],
             creator=self.cleaned_data['artwork_creator'],
-            year=self.cleaned_data['artwork_year']
+            year=self.cleaned_data['artwork_year'],
         )
-        review, created = Review.objects.get_or_create(
-            user=user,
-            artwork=artwork,
-        )
+        if artwork.kind == 'show':
+            # Allow unlimited reviews:
+            review, created = Review.objects.get_or_create(
+                pk=self.cleaned_data['review_id'],
+                user=user,
+                artwork=artwork,
+                season=self.cleaned_data['artwork_season'],
+                episode=self.cleaned_data['artwork_episode'],
+            )
+        else:
+            review, created = Review.objects.get_or_create(
+                user=user,
+                artwork=artwork,
+            )
         review.spider_quantity = self.cleaned_data['spider_quantity']
         review.summary = self.cleaned_data['summary']
         review.spider_quality.set(
