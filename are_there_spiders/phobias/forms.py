@@ -12,8 +12,8 @@ class ReviewForm(forms.Form):
     )
     artwork_name = forms.CharField()
     artwork_kind = forms.ChoiceField(choices=Artwork.ARTWORK_CHOICES)
-    artwork_creator = forms.CharField()
-    artwork_year = forms.IntegerField()
+    artwork_creator = forms.CharField(required=False)
+    artwork_year = forms.IntegerField(required=False)
     artwork_season = forms.CharField(required=False)
     artwork_episode = forms.CharField(required=False)
 
